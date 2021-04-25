@@ -26,7 +26,6 @@ type
     BtnSubtraction: TButton;
     BtnAddition: TButton;
     BtnAllClear: TButton;
-    PnlFlags: TPanel;
     ActionList: TActionList;
     AjudaTopicosCmd: TAction;
     AjudaSobreCmd: TAction;

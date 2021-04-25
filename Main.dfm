@@ -57,6 +57,7 @@ object FrmMain: TFrmMain
     Top = 246
     Width = 66
     Height = 33
+    Hint = 'Atalho: = | Executa uma opera'#231#227'o.'
     Caption = '='
     ParentShowHint = False
     ShowHint = True
@@ -100,6 +101,7 @@ object FrmMain: TFrmMain
     Top = 198
     Width = 66
     Height = 33
+    Hint = 'Atalho: , | Insere um separador decimal.'
     Caption = '.'
     ParentShowHint = False
     ShowHint = True
@@ -154,6 +156,7 @@ object FrmMain: TFrmMain
     Top = 102
     Width = 66
     Height = 33
+    Hint = 'Atalho: / | Divide.'
     Caption = #247
     ParentShowHint = False
     ShowHint = True
@@ -164,6 +167,7 @@ object FrmMain: TFrmMain
     Top = 102
     Width = 66
     Height = 33
+    Hint = 'Atalho: * | Multiplica.'
     Caption = #215
     ParentShowHint = False
     ShowHint = True
@@ -174,6 +178,7 @@ object FrmMain: TFrmMain
     Top = 102
     Width = 66
     Height = 33
+    Hint = 'Atalho: - | Subtrai.'
     Caption = '-'
     ParentShowHint = False
     ShowHint = True
@@ -184,6 +189,7 @@ object FrmMain: TFrmMain
     Top = 102
     Width = 66
     Height = 33
+    Hint = 'Atalho: + | Soma.'
     Caption = '+'
     ParentShowHint = False
     ShowHint = True
@@ -194,22 +200,11 @@ object FrmMain: TFrmMain
     Top = 54
     Width = 66
     Height = 33
+    Hint = 'Atalho: Esc | Limpa a opera'#231#227'o atual.'
     Caption = 'AC'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 16
-  end
-  object PnlFlags: TPanel
-    Left = 8
-    Top = 53
-    Width = 66
-    Height = 33
-    BevelOuter = bvLowered
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -22
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 17
   end
   object PnlScreen: TPanel
     Left = 8
@@ -228,7 +223,7 @@ object FrmMain: TFrmMain
     Font.Style = []
     ParentBackground = False
     ParentFont = False
-    TabOrder = 18
+    TabOrder = 17
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -237,11 +232,17 @@ object FrmMain: TFrmMain
     Height = 19
     Panels = <
       item
-        Width = 50
+        Width = 200
+      end
+      item
+        Width = 25
+      end
+      item
+        Width = 25
+      end
+      item
+        Width = 25
       end>
-    ExplicitLeft = 160
-    ExplicitTop = 336
-    ExplicitWidth = 0
   end
   object ActionList: TActionList
     Left = 352
