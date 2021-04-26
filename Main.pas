@@ -10,7 +10,6 @@ uses
 
 type
   TFrmMain = class(TForm)
-    Btn11: TButton;
     ActionList: TActionList;
     AjudaTopicosCmd: TAction;
     AjudaSobreCmd: TAction;
@@ -39,6 +38,9 @@ type
     BtnSubtraction: TSpeedButton;
     BtnAddition: TSpeedButton;
     BtnAllClear: TSpeedButton;
+    PnlErrorFlag: TPanel;
+    PnlConstantFlag: TPanel;
+    PnlOperator: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure BtnAllClearClick(Sender: TObject);

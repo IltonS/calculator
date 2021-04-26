@@ -5,7 +5,7 @@ object FrmMain: TFrmMain
   BorderStyle = bsSingle
   Caption = 'Calculadora'
   ClientHeight = 290
-  ClientWidth = 703
+  ClientWidth = 358
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -25,7 +25,10 @@ object FrmMain: TFrmMain
     Top = 221
     Width = 33
     Height = 33
+    Hint = 'Atalho: 1|Insere o valor no display.'
     Caption = '1'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn1Click
   end
   object Btn2: TSpeedButton
@@ -33,7 +36,10 @@ object FrmMain: TFrmMain
     Top = 221
     Width = 33
     Height = 33
+    Hint = 'Atalho: 2|Insere o valor no display.'
     Caption = '2'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn2Click
   end
   object Btn3: TSpeedButton
@@ -41,7 +47,10 @@ object FrmMain: TFrmMain
     Top = 221
     Width = 33
     Height = 33
+    Hint = 'Atalho: 3|Insere o valor no display.'
     Caption = '3'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn3Click
   end
   object BtnEquals: TSpeedButton
@@ -49,14 +58,20 @@ object FrmMain: TFrmMain
     Top = 221
     Width = 33
     Height = 33
+    Hint = 'Atalho: Enter|Realiza uma opera'#231#227'o.'
     Caption = '='
+    ParentShowHint = False
+    ShowHint = True
   end
   object Btn4: TSpeedButton
     Left = 8
     Top = 182
     Width = 33
     Height = 33
+    Hint = 'Atalho: 4|Insere o valor no display.'
     Caption = '4'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn4Click
   end
   object Btn5: TSpeedButton
@@ -64,7 +79,10 @@ object FrmMain: TFrmMain
     Top = 182
     Width = 33
     Height = 33
+    Hint = 'Atalho: 5|Insere o valor no display.'
     Caption = '5'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn5Click
   end
   object Btn6: TSpeedButton
@@ -72,7 +90,10 @@ object FrmMain: TFrmMain
     Top = 182
     Width = 33
     Height = 33
+    Hint = 'Atalho: 6|Insere o valor no display.'
     Caption = '6'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn6Click
   end
   object BtnDecimal: TSpeedButton
@@ -80,14 +101,20 @@ object FrmMain: TFrmMain
     Top = 182
     Width = 33
     Height = 33
+    Hint = 'Atalho: ,|Insere separador decimal.'
     Caption = ','
+    ParentShowHint = False
+    ShowHint = True
   end
   object Btn7: TSpeedButton
     Left = 8
     Top = 143
     Width = 33
     Height = 33
+    Hint = 'Atalho: 7|Insere o valor no display.'
     Caption = '7'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn7Click
   end
   object Btn8: TSpeedButton
@@ -95,7 +122,10 @@ object FrmMain: TFrmMain
     Top = 143
     Width = 33
     Height = 33
+    Hint = 'Atalho: 8|Insere o valor no display.'
     Caption = '8'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn8Click
   end
   object Btn9: TSpeedButton
@@ -103,7 +133,10 @@ object FrmMain: TFrmMain
     Top = 143
     Width = 33
     Height = 33
+    Hint = 'Atalho: 9|Insere o valor no display.'
     Caption = '9'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn9Click
   end
   object Btn0: TSpeedButton
@@ -111,7 +144,10 @@ object FrmMain: TFrmMain
     Top = 143
     Width = 33
     Height = 33
+    Hint = 'Atalho: 0|Insere o valor no display.'
     Caption = '0'
+    ParentShowHint = False
+    ShowHint = True
     OnClick = Btn0Click
   end
   object BtnDivision: TSpeedButton
@@ -119,49 +155,53 @@ object FrmMain: TFrmMain
     Top = 104
     Width = 33
     Height = 33
+    Hint = 'Atalho: /|Divide.'
     Caption = #247
+    ParentShowHint = False
+    ShowHint = True
   end
   object BtnMultiplication: TSpeedButton
     Left = 58
     Top = 104
     Width = 33
     Height = 33
+    Hint = 'Atalho: *|Multiplica.'
     Caption = #215
+    ParentShowHint = False
+    ShowHint = True
   end
   object BtnSubtraction: TSpeedButton
     Left = 108
     Top = 104
     Width = 33
     Height = 33
+    Hint = 'Atalho: -|Subtrai.'
     Caption = '-'
+    ParentShowHint = False
+    ShowHint = True
   end
   object BtnAddition: TSpeedButton
     Left = 158
     Top = 104
     Width = 33
     Height = 33
+    Hint = 'Atalho: +|Soma.'
     Caption = '+'
+    ParentShowHint = False
+    ShowHint = True
   end
   object BtnAllClear: TSpeedButton
     Left = 158
     Top = 65
     Width = 33
     Height = 33
+    Hint = 'Atalho: Esc|Limpa a opera'#231#227'o.'
     BiDiMode = bdLeftToRight
     Caption = 'AC'
-    ParentBiDiMode = False
-    OnClick = BtnAllClearClick
-  end
-  object Btn11: TButton
-    Left = 544
-    Top = 166
-    Width = 66
-    Height = 33
-    Hint = 'Atalho: 1 | Insere esse n'#250'mero no display.'
-    Caption = '1'
     ParentShowHint = False
+    ParentBiDiMode = False
     ShowHint = True
-    TabOrder = 0
+    OnClick = BtnAllClearClick
   end
   object PnlScreen: TPanel
     Left = 8
@@ -169,10 +209,8 @@ object FrmMain: TFrmMain
     Width = 183
     Height = 33
     Alignment = taRightJustify
-    BevelOuter = bvNone
     BorderWidth = 3
     Caption = '0'
-    Color = clWindow
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -22
@@ -180,12 +218,12 @@ object FrmMain: TFrmMain
     Font.Style = []
     ParentBackground = False
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
   end
   object StatusBar: TStatusBar
     Left = 0
     Top = 271
-    Width = 703
+    Width = 358
     Height = 19
     Panels = <
       item
@@ -194,9 +232,43 @@ object FrmMain: TFrmMain
     ExplicitTop = 296
     ExplicitWidth = 464
   end
+  object PnlErrorFlag: TPanel
+    Left = 8
+    Top = 65
+    Width = 33
+    Height = 33
+    Hint = 'Erro|Exibe E em caso de erro.'
+    Caption = 'E'
+    ParentShowHint = False
+    ShowCaption = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object PnlConstantFlag: TPanel
+    Left = 58
+    Top = 65
+    Width = 33
+    Height = 33
+    Hint = 'Constante|Exibe K para c'#225'lculos constantes.'
+    Caption = 'K'
+    ParentShowHint = False
+    ShowCaption = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object PnlOperator: TPanel
+    Left = 108
+    Top = 65
+    Width = 33
+    Height = 33
+    Hint = 'Operador|Exibe o operador.'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+  end
   object ActionList: TActionList
-    Left = 496
-    Top = 72
+    Left = 248
+    Top = 64
     object AjudaTopicosCmd: TAction
       Category = 'Ajuda'
       Caption = '&T'#243'picos da Ajuda'
@@ -208,8 +280,8 @@ object FrmMain: TFrmMain
     end
   end
   object MainMenu: TMainMenu
-    Left = 576
-    Top = 72
+    Left = 312
+    Top = 64
     object Ajuda1: TMenuItem
       Caption = '&Ajuda'
       object AjudaTopicosItem: TMenuItem
@@ -225,7 +297,7 @@ object FrmMain: TFrmMain
   end
   object ApplicationEvents: TApplicationEvents
     OnHint = ApplicationEventsHint
-    Left = 496
-    Top = 16
+    Left = 280
+    Top = 8
   end
 end
