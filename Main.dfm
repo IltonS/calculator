@@ -12,11 +12,13 @@ object FrmMain: TFrmMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   Menu = MainMenu
   OldCreateOrder = False
   Position = poDesktopCenter
   OnActivate = FormActivate
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object Btn1: TButton
@@ -29,6 +31,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
+    OnClick = Btn1Click
   end
   object Btn2: TButton
     Left = 88
@@ -40,6 +43,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
+    OnClick = Btn2Click
   end
   object Btn3: TButton
     Left = 168
@@ -51,6 +55,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 2
+    OnClick = Btn3Click
   end
   object BtnEquals: TButton
     Left = 248
@@ -73,6 +78,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
+    OnClick = Btn4Click
   end
   object Btn5: TButton
     Left = 88
@@ -84,6 +90,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
+    OnClick = Btn5Click
   end
   object Btn6: TButton
     Left = 168
@@ -95,6 +102,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 6
+    OnClick = Btn6Click
   end
   object BtnDecimal: TButton
     Left = 246
@@ -117,6 +125,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 8
+    OnClick = Btn7Click
   end
   object Btn8: TButton
     Left = 88
@@ -128,6 +137,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 9
+    OnClick = Btn8Click
   end
   object Btn9: TButton
     Left = 168
@@ -139,6 +149,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 10
+    OnClick = Btn9Click
   end
   object Btn0: TButton
     Left = 246
@@ -150,6 +161,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 11
+    OnClick = Btn0Click
   end
   object BtnDivision: TButton
     Left = 8
@@ -205,6 +217,7 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
     TabOrder = 16
+    OnClick = BtnAllClearClick
   end
   object PnlScreen: TPanel
     Left = 8
