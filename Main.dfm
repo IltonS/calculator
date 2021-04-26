@@ -105,6 +105,7 @@ object FrmMain: TFrmMain
     Caption = ','
     ParentShowHint = False
     ShowHint = True
+    OnClick = BtnDecimalClick
   end
   object Btn7: TSpeedButton
     Left = 8
@@ -229,8 +230,6 @@ object FrmMain: TFrmMain
       item
         Width = 200
       end>
-    ExplicitTop = 296
-    ExplicitWidth = 464
   end
   object PnlErrorFlag: TPanel
     Left = 8
@@ -261,7 +260,7 @@ object FrmMain: TFrmMain
     Top = 65
     Width = 33
     Height = 33
-    Hint = 'Operador|Exibe o operador.'
+    Hint = 'Operador|Exibe o operador atual.'
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4

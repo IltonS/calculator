@@ -55,6 +55,7 @@ type
     procedure Btn0Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure Btn1Click(Sender: TObject);
+    procedure BtnDecimalClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -138,13 +139,20 @@ procedure TFrmMain.BtnAllClearClick(Sender: TObject);
 begin
   FreeAndNil(Calc);
   Calc := TBaseCalc.Create;
-  PnlScreen.Caption := '0';
+  PnlScreen.Caption := Calc.Screen;
+end;
+
+procedure TFrmMain.BtnDecimalClick(Sender: TObject);
+begin
+  Calc.PushToScreen(',');
+  PnlScreen.Caption := Calc.Screen;
 end;
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 begin
   FrmMain.Width := 206;
   Calc := TBaseCalc.Create;
+  PnlScreen.Caption := Calc.Screen;
 end;
 
 procedure TFrmMain.FormKeyDown(Sender: TObject; var Key: Word;
@@ -162,6 +170,11 @@ begin
     VK_NUMPAD9: Btn9Click(Sender);
     VK_NUMPAD0: Btn0Click(Sender);
 
+    {Comma}
+    188: BtnDecimalClick(Sender);
+    110: BtnDecimalClick(Sender);
+
+    {Numeric Character}
     49: Btn1Click(Sender);
     50: Btn2Click(Sender);
     51: Btn3Click(Sender);

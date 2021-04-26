@@ -5,12 +5,13 @@ interface
 type
 
   TBaseCalc = class
-    private
-      constructor Create;
     protected
       FScreen: String;
+      FlagDecimal: Boolean;
+    public
+      constructor Create;
     published
-      procedure PushToScreen(value: Char);
+      procedure PushToScreen(Value: Char);
       property Screen: String read FScreen;
   end;
 
@@ -19,12 +20,28 @@ implementation
 
 constructor TBaseCalc.Create;
 begin
-  Self.FScreen := '';
+  FScreen := '0';
+  FlagDecimal := False;
 end;
 
-procedure TBaseCalc.PushToScreen(value: Char);
+procedure TBaseCalc.PushToScreen(Value: Char);
 begin
-  FScreen := FScreen + Value;
+  if (Value=',') and (FlagDecimal) then
+    Exit;
+
+  if (Value=',') then
+    FlagDecimal := True;
+
+  if (Value='0') and (FScreen='0') then
+    Exit;
+
+  if (Value<>'0') and (FScreen='0') then
+    if (Value<>',') then
+      FScreen := Value
+    else
+      FScreen := FScreen + Value
+  else
+    FScreen := FScreen + Value;
 end;
 
 end.
