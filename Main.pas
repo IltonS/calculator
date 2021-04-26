@@ -5,27 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Menus,
-  System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.AppEvnts, BaseCalc;
+  System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.AppEvnts, BaseCalc,
+  Vcl.Buttons;
 
 type
   TFrmMain = class(TForm)
-    Btn1: TButton;
-    Btn2: TButton;
-    Btn3: TButton;
-    BtnEquals: TButton;
-    Btn4: TButton;
-    Btn5: TButton;
-    Btn6: TButton;
-    BtnDecimal: TButton;
-    Btn7: TButton;
-    Btn8: TButton;
-    Btn9: TButton;
-    Btn0: TButton;
-    BtnDivision: TButton;
-    BtnMultiplication: TButton;
-    BtnSubtraction: TButton;
-    BtnAddition: TButton;
-    BtnAllClear: TButton;
+    Btn11: TButton;
     ActionList: TActionList;
     AjudaTopicosCmd: TAction;
     AjudaSobreCmd: TAction;
@@ -37,10 +22,25 @@ type
     PnlScreen: TPanel;
     StatusBar: TStatusBar;
     ApplicationEvents: TApplicationEvents;
-    procedure FormActivate(Sender: TObject);
+    Btn1: TSpeedButton;
+    Btn2: TSpeedButton;
+    Btn3: TSpeedButton;
+    BtnEquals: TSpeedButton;
+    Btn4: TSpeedButton;
+    Btn5: TSpeedButton;
+    Btn6: TSpeedButton;
+    BtnDecimal: TSpeedButton;
+    Btn7: TSpeedButton;
+    Btn8: TSpeedButton;
+    Btn9: TSpeedButton;
+    Btn0: TSpeedButton;
+    BtnDivision: TSpeedButton;
+    BtnMultiplication: TSpeedButton;
+    BtnSubtraction: TSpeedButton;
+    BtnAddition: TSpeedButton;
+    BtnAllClear: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
-    procedure Btn1Click(Sender: TObject);
     procedure BtnAllClearClick(Sender: TObject);
     procedure Btn2Click(Sender: TObject);
     procedure Btn3Click(Sender: TObject);
@@ -52,6 +52,7 @@ type
     procedure Btn9Click(Sender: TObject);
     procedure Btn0Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Btn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -138,14 +139,9 @@ begin
   PnlScreen.Caption := '0';
 end;
 
-procedure TFrmMain.FormActivate(Sender: TObject);
-begin
-  FocusControl(Nil);
-end;
-
 procedure TFrmMain.FormCreate(Sender: TObject);
 begin
-  FrmMain.Width := 327;
+  FrmMain.Width := 206;
   Calc := TBaseCalc.Create;
 end;
 
