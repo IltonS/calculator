@@ -135,10 +135,9 @@ object FrmMain: TFrmMain
     Top = 220
     Width = 33
     Height = 33
-    Hint = 'Atalho: ,|Insere o separador decimal.'
+    Action = ActBtnEquals
     ParentShowHint = False
     ShowHint = True
-    OnClick = ActBtnDecimalExecute
   end
   object BtnDivision: TSpeedButton
     Left = 8
@@ -337,6 +336,12 @@ object FrmMain: TFrmMain
       Caption = '+'
       Hint = 'Atalho: +|Soma.'
       OnExecute = ActBtnAdditionExecute
+    end
+    object ActBtnEquals: TAction
+      Category = 'Button'
+      Caption = '='
+      Hint = 'Atalho: Enter|Executa a opera'#231#227'o atual.'
+      OnExecute = ActBtnEqualsExecute
     end
   end
   object MainMenu: TMainMenu

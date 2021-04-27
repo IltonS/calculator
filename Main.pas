@@ -55,6 +55,7 @@ type
     BtnSubtraction: TSpeedButton;
     BtnAddition: TSpeedButton;
     ActBtnAddition: TAction;
+    ActBtnEquals: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -72,6 +73,7 @@ type
     procedure ActBtnDecimalExecute(Sender: TObject);
     procedure ActBtnAdditionExecute(Sender: TObject);
     procedure ActionListUpdate(Action: TBasicAction; var Handled: Boolean);
+    procedure ActBtnEqualsExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,6 +151,7 @@ end;
 procedure TFrmMain.ActBtnAdditionExecute(Sender: TObject);
 begin
   Calc.TurnOnAddition;
+  PnlScreen.Caption := Calc.Screen;
 end;
 
 procedure TFrmMain.ActBtnAllClearExecute(Sender: TObject);
@@ -164,6 +167,12 @@ begin
   PnlScreen.Caption := Calc.Screen;
 end;
 
+procedure TFrmMain.ActBtnEqualsExecute(Sender: TObject);
+begin
+  Calc.PushResultToScreen;
+  PnlScreen.Caption := Calc.Screen;
+end;
+
 procedure TFrmMain.ActionListUpdate(Action: TBasicAction; var Handled: Boolean);
 begin
   //Update PnlOperator
@@ -174,6 +183,10 @@ begin
     opDivision: PnlOperator.Caption := '/';
     opUnset: PnlOperator.Caption := '';
   end;
+
+  //Update PnlConstantFlag
+  PnlConstantFlag.ShowCaption := Calc.ConstantFlag;
+
 end;
 
 procedure TFrmMain.ApplicationEventsHint(Sender: TObject);
@@ -200,6 +213,9 @@ begin
     end;
 
   case Key of
+    VK_ESCAPE: ActBtnAllClearExecute(Sender);
+    VK_RETURN: ActBtnEqualsExecute(Sender);
+
     //Num Pad
     VK_NUMPAD1: ActBtn1Execute(Sender);
     VK_NUMPAD2: ActBtn2Execute(Sender);
@@ -230,8 +246,6 @@ begin
 
     //Operations
     107: ActBtnAdditionExecute(Sender);
-
-    VK_ESCAPE: ActBtnAllClearExecute(Sender);
   end;
 end;
 
