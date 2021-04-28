@@ -29,6 +29,7 @@ type
       procedure PushResultToScreen;
       procedure PushAddition;
       procedure PushSubtraction;
+      procedure PushMultiplication;
   end;
 
 implementation
@@ -128,6 +129,11 @@ begin
         opSubtraction: FScreen := FloatToStr( Answer - StrToFloat(FScreen) );
         opMultiplication: FScreen := FloatToStr( Answer * StrToFloat(FScreen) );
         opDivision: FScreen := FloatToStr( Answer / StrToFloat(FScreen) );
+      end
+    else
+      case FOperation of
+        opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * StrToFloat(FScreen) );
+        opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / StrToFloat(FScreen) );
       end;
 
     Answer := 0;
@@ -187,6 +193,34 @@ begin
   else
   begin
     FOperation := opSubtraction;
+    FlagClearScreen := True;
+    FlagConstant := False;
+    FlagDontRepeatOperation := True;
+  end;
+end;
+
+procedure TBaseCalc.PushMultiplication;
+begin
+  if FlagError then
+    Exit;
+
+  if FOperation = opMultiplication then
+    if FlagDontRepeatOperation then
+    begin
+      FlagConstant := not FlagConstant;
+      if FlagConstant then
+        K := StrToFloat(FScreen);
+    end
+    else
+    begin
+      FOperation := opMultiplication;
+      FlagClearScreen := True;
+      FScreen := FloatToStr( Answer * StrToFloat(FScreen) );
+      FlagDontRepeatOperation := True;
+    end
+  else
+  begin
+    FOperation := opMultiplication;
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;

@@ -58,6 +58,7 @@ type
     ActBtnEquals: TAction;
     TmrPowerOff: TTimer;
     ActBtnSubtraction: TAction;
+    ActBtnMultiplication: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -80,6 +81,7 @@ type
     procedure TmrPowerOffTimer(Sender: TObject);
     procedure ActionListExecute(Action: TBasicAction; var Handled: Boolean);
     procedure ActBtnSubtractionExecute(Sender: TObject);
+    procedure ActBtnMultiplicationExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -178,6 +180,12 @@ begin
   PnlScreen.Caption := Calc.Screen;
 end;
 
+procedure TFrmMain.ActBtnMultiplicationExecute(Sender: TObject);
+begin
+  Calc.PushMultiplication;
+  PnlScreen.Caption := Calc.Screen;
+end;
+
 procedure TFrmMain.ActBtnSubtractionExecute(Sender: TObject);
 begin
   Calc.PushSubtraction;
@@ -198,8 +206,8 @@ begin
   case Calc.Operation of
     opAddition: PnlOperator.Caption := '+';
     opSubtraction: PnlOperator.Caption := '-';
-    opMultiplication: PnlOperator.Caption := '*';
-    opDivision: PnlOperator.Caption := '/';
+    opMultiplication: PnlOperator.Caption := '×';
+    opDivision: PnlOperator.Caption := '÷';
     opUnset: PnlOperator.Caption := '';
   end;
 
@@ -208,7 +216,6 @@ begin
 
   //Update PnlErrorFlag
   PnlErrorFlag.ShowCaption := Calc.ErrorOn;
-
 end;
 
 procedure TFrmMain.ApplicationEventsHint(Sender: TObject);
@@ -235,50 +242,53 @@ procedure TFrmMain.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   //ShowMessage(IntToStr(Key));
+  //PnlScreen.Caption := IntToStr(Key);
 
   //Shift key pressed
   if (Shift=[ssShift]) then
     case Key of
       187: ActBtnAddition.Execute;
+      56: ActBtnMultiplication.Execute;
+    end
+  else
+    case Key of
+      VK_ESCAPE: ActBtnAllClear.Execute;
+      VK_RETURN: ActBtnEquals.Execute;
+
+      //Num Pad
+      VK_NUMPAD1: ActBtn1.Execute;
+      VK_NUMPAD2: ActBtn2.Execute;
+      VK_NUMPAD3: ActBtn3.Execute;
+      VK_NUMPAD4: ActBtn4.Execute;
+      VK_NUMPAD5: ActBtn5.Execute;
+      VK_NUMPAD6: ActBtn6.Execute;
+      VK_NUMPAD7: ActBtn7.Execute;
+      VK_NUMPAD8: ActBtn8.Execute;
+      VK_NUMPAD9: ActBtn9.Execute;
+      VK_NUMPAD0: ActBtn0.Execute;
+
+      //Numeric Character
+      49: ActBtn1.Execute;
+      50: ActBtn2.Execute;
+      51: ActBtn3.Execute;
+      52: ActBtn4.Execute;
+      53: ActBtn5.Execute;
+      54: ActBtn6.Execute;
+      55: ActBtn7.Execute;
+      56: ActBtn8.Execute;
+      57: ActBtn9.Execute;
+      48: ActBtn0.Execute;
+
+      //Comma
+      188: ActBtnDecimal.Execute;
+      110: ActBtnDecimal.Execute;
+
+      //Operations
+      107: ActBtnAddition.Execute;
+      109: ActBtnSubtraction.Execute;
+      189: ActBtnSubtraction.Execute;
+      106: ActBtnMultiplication.Execute;
     end;
-
-  case Key of
-    VK_ESCAPE: ActBtnAllClear.Execute;
-    VK_RETURN: ActBtnEquals.Execute;
-
-    //Num Pad
-    VK_NUMPAD1: ActBtn1.Execute;
-    VK_NUMPAD2: ActBtn2.Execute;
-    VK_NUMPAD3: ActBtn3.Execute;
-    VK_NUMPAD4: ActBtn4.Execute;
-    VK_NUMPAD5: ActBtn5.Execute;
-    VK_NUMPAD6: ActBtn6.Execute;
-    VK_NUMPAD7: ActBtn7.Execute;
-    VK_NUMPAD8: ActBtn8.Execute;
-    VK_NUMPAD9: ActBtn9.Execute;
-    VK_NUMPAD0: ActBtn0.Execute;
-
-    //Numeric Character
-    49: ActBtn1.Execute;
-    50: ActBtn2.Execute;
-    51: ActBtn3.Execute;
-    52: ActBtn4.Execute;
-    53: ActBtn5.Execute;
-    54: ActBtn6.Execute;
-    55: ActBtn7.Execute;
-    56: ActBtn8.Execute;
-    57: ActBtn9.Execute;
-    48: ActBtn0.Execute;
-
-    //Comma
-    188: ActBtnDecimal.Execute;
-    110: ActBtnDecimal.Execute;
-
-    //Operations
-    107: ActBtnAddition.Execute;
-    109: ActBtnSubtraction.Execute;
-    189: ActBtnSubtraction.Execute;
-  end;
 end;
 
 procedure TFrmMain.TmrPowerOffTimer(Sender: TObject);
