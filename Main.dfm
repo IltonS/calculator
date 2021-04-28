@@ -248,6 +248,7 @@ object FrmMain: TFrmMain
     TabOrder = 5
   end
   object ActionList: TActionList
+    OnExecute = ActionListExecute
     OnUpdate = ActionListUpdate
     Left = 264
     Top = 80
@@ -364,6 +365,12 @@ object FrmMain: TFrmMain
   object ApplicationEvents: TApplicationEvents
     OnHint = ApplicationEventsHint
     Left = 264
+    Top = 16
+  end
+  object TmrPowerOff: TTimer
+    Enabled = False
+    OnTimer = TmrPowerOffTimer
+    Left = 352
     Top = 16
   end
 end
