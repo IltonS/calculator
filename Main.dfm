@@ -17,6 +17,7 @@ object FrmMain: TFrmMain
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
@@ -248,7 +249,7 @@ object FrmMain: TFrmMain
   end
   object ActionList: TActionList
     OnUpdate = ActionListUpdate
-    Left = 256
+    Left = 264
     Top = 80
     object AjudaTopicosCmd: TAction
       Category = 'Ajuda'
@@ -345,7 +346,7 @@ object FrmMain: TFrmMain
     end
   end
   object MainMenu: TMainMenu
-    Left = 256
+    Left = 264
     Top = 136
     object Ajuda1: TMenuItem
       Caption = '&Ajuda'

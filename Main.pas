@@ -74,6 +74,7 @@ type
     procedure ActBtnAdditionExecute(Sender: TObject);
     procedure ActionListUpdate(Action: TBasicAction; var Handled: Boolean);
     procedure ActBtnEqualsExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -150,14 +151,13 @@ end;
 
 procedure TFrmMain.ActBtnAdditionExecute(Sender: TObject);
 begin
-  Calc.TurnOnAddition;
+  Calc.PushAddition;
   PnlScreen.Caption := Calc.Screen;
 end;
 
 procedure TFrmMain.ActBtnAllClearExecute(Sender: TObject);
 begin
-  FreeAndNil(Calc);
-  Calc := TBaseCalc.Create;
+  Calc.ClearAll;
   PnlScreen.Caption := Calc.Screen;
 end;
 
@@ -185,7 +185,10 @@ begin
   end;
 
   //Update PnlConstantFlag
-  PnlConstantFlag.ShowCaption := Calc.ConstantFlag;
+  PnlConstantFlag.ShowCaption := Calc.ConstantOn;
+
+  //Update PnlErrorFlag
+  PnlErrorFlag.ShowCaption := Calc.ErrorOn;
 
 end;
 
@@ -199,6 +202,11 @@ begin
   FrmMain.Width := 206;
   Calc := TBaseCalc.Create;
   PnlScreen.Caption := Calc.Screen;
+end;
+
+procedure TFrmMain.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(Calc);
 end;
 
 procedure TFrmMain.FormKeyDown(Sender: TObject; var Key: Word;
