@@ -59,6 +59,7 @@ type
     TmrPowerOff: TTimer;
     ActBtnSubtraction: TAction;
     ActBtnMultiplication: TAction;
+    ActBtnDivision: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -82,6 +83,8 @@ type
     procedure ActionListExecute(Action: TBasicAction; var Handled: Boolean);
     procedure ActBtnSubtractionExecute(Sender: TObject);
     procedure ActBtnMultiplicationExecute(Sender: TObject);
+    procedure ActBtnDivisionExecute(Sender: TObject);
+    procedure ApplicationEventsException(Sender: TObject; E: Exception);
   private
     { Private declarations }
   public
@@ -174,6 +177,12 @@ begin
   PnlScreen.Caption := Calc.Screen;
 end;
 
+procedure TFrmMain.ActBtnDivisionExecute(Sender: TObject);
+begin
+  Calc.PushDivision;
+  PnlScreen.Caption := Calc.Screen;
+end;
+
 procedure TFrmMain.ActBtnEqualsExecute(Sender: TObject);
 begin
   Calc.PushResultToScreen;
@@ -216,6 +225,11 @@ begin
 
   //Update PnlErrorFlag
   PnlErrorFlag.ShowCaption := Calc.ErrorOn;
+end;
+
+procedure TFrmMain.ApplicationEventsException(Sender: TObject; E: Exception);
+begin
+  //Remove this procedure to see error dialogs.
 end;
 
 procedure TFrmMain.ApplicationEventsHint(Sender: TObject);
@@ -288,6 +302,8 @@ begin
       109: ActBtnSubtraction.Execute;
       189: ActBtnSubtraction.Execute;
       106: ActBtnMultiplication.Execute;
+      111: ActBtnDivision.Execute;
+      193: ActBtnDivision.Execute;
     end;
 end;
 

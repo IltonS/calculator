@@ -145,9 +145,9 @@ object FrmMain: TFrmMain
     Top = 104
     Width = 33
     Height = 33
+    Action = ActBtnDivision
     ParentShowHint = False
     ShowHint = True
-    OnClick = ActBtn7Execute
   end
   object BtnMultiplication: TSpeedButton
     Left = 58
@@ -351,6 +351,12 @@ object FrmMain: TFrmMain
       Hint = 'Atalho: *|Multiplica.'
       OnExecute = ActBtnMultiplicationExecute
     end
+    object ActBtnDivision: TAction
+      Category = 'Button'
+      Caption = #247
+      Hint = 'Atalho: /|Divide.'
+      OnExecute = ActBtnDivisionExecute
+    end
     object ActBtnEquals: TAction
       Category = 'Button'
       Caption = '='
@@ -375,6 +381,7 @@ object FrmMain: TFrmMain
     end
   end
   object ApplicationEvents: TApplicationEvents
+    OnException = ApplicationEventsException
     OnHint = ApplicationEventsHint
     Left = 264
     Top = 16

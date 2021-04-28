@@ -30,6 +30,7 @@ type
       procedure PushAddition;
       procedure PushSubtraction;
       procedure PushMultiplication;
+      procedure PushDivision;
   end;
 
 implementation
@@ -70,6 +71,7 @@ begin
   if not ValidateInput(Value) then
   begin
     FlagError := True;
+    FOperation := opUnset;
     raise Exception.Create('Invalid Input');
   end;
 
@@ -110,36 +112,42 @@ begin
   if FlagError then
     Exit;
 
-  if FlagConstant then
-  begin
-    case FOperation of
-      opAddition: FScreen := FloatToStr( StrToFloat(FScreen) + K );
-      opSubtraction: FScreen := FloatToStr( StrToFloat(FScreen) - K );
-      opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * K );
-      opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / K );
-    end;
-    FlagClearScreen := True;
-    FlagDontRepeatOperation := True;
-  end
-  else
-  begin
-    if not FlagDontRepeatOperation then
+  try
+    if FlagConstant then
+    begin
       case FOperation of
-        opAddition: FScreen := FloatToStr( Answer + StrToFloat(FScreen) );
-        opSubtraction: FScreen := FloatToStr( Answer - StrToFloat(FScreen) );
-        opMultiplication: FScreen := FloatToStr( Answer * StrToFloat(FScreen) );
-        opDivision: FScreen := FloatToStr( Answer / StrToFloat(FScreen) );
-      end
-    else
-      case FOperation of
-        opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * StrToFloat(FScreen) );
-        opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / StrToFloat(FScreen) );
+        opAddition: FScreen := FloatToStr( StrToFloat(FScreen) + K );
+        opSubtraction: FScreen := FloatToStr( StrToFloat(FScreen) - K );
+        opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * K );
+        opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / K );
       end;
+      FlagClearScreen := True;
+      FlagDontRepeatOperation := True;
+    end
+    else
+    begin
+      if not FlagDontRepeatOperation then
+        case FOperation of
+          opAddition: FScreen := FloatToStr( Answer + StrToFloat(FScreen) );
+          opSubtraction: FScreen := FloatToStr( Answer - StrToFloat(FScreen) );
+          opMultiplication: FScreen := FloatToStr( Answer * StrToFloat(FScreen) );
+          opDivision: FScreen := FloatToStr( Answer / StrToFloat(FScreen) );
+        end
+      else
+        case FOperation of
+          opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * StrToFloat(FScreen) );
+          opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / StrToFloat(FScreen) );
+        end;
 
-    Answer := 0;
-    FlagClearScreen := True;
-    FlagDontRepeatOperation := False;
+      Answer := 0;
+      FlagClearScreen := True;
+      FlagDontRepeatOperation := False;
+      FOperation := opUnset;
+    end;
+  except
+    FlagError := True;
     FOperation := opUnset;
+    raise Exception.Create('Invalid Operation');
   end;
 end;
 
@@ -221,6 +229,42 @@ begin
   else
   begin
     FOperation := opMultiplication;
+    FlagClearScreen := True;
+    FlagConstant := False;
+    FlagDontRepeatOperation := True;
+  end;
+end;
+
+procedure TBaseCalc.PushDivision;
+begin
+  if FlagError then
+    Exit;
+
+  if FOperation = opDivision then
+    if FlagDontRepeatOperation then
+    begin
+      FlagConstant := not FlagConstant;
+      if FlagConstant then
+        K := StrToFloat(FScreen);
+    end
+    else
+    begin
+      FOperation := opDivision;
+      FlagClearScreen := True;
+
+      try
+        FScreen := FloatToStr( Answer / StrToFloat(FScreen) );
+      except
+        FlagError := True;
+        FOperation := opUnset;
+        raise Exception.Create('Invalid Operation');
+      end;
+
+      FlagDontRepeatOperation := True;
+    end
+  else
+  begin
+    FOperation := opDivision;
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;
