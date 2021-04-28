@@ -163,9 +163,9 @@ object FrmMain: TFrmMain
     Top = 104
     Width = 33
     Height = 33
+    Action = ActBtnSubtraction
     ParentShowHint = False
     ShowHint = True
-    OnClick = ActBtn7Execute
   end
   object BtnAddition: TSpeedButton
     Left = 158
@@ -338,6 +338,12 @@ object FrmMain: TFrmMain
       Caption = '+'
       Hint = 'Atalho: +|Soma.'
       OnExecute = ActBtnAdditionExecute
+    end
+    object ActBtnSubtraction: TAction
+      Category = 'Button'
+      Caption = '-'
+      Hint = 'Atalho: -|Subtrai.'
+      OnExecute = ActBtnSubtractionExecute
     end
     object ActBtnEquals: TAction
       Category = 'Button'

@@ -28,6 +28,7 @@ type
       procedure PushToScreen(Value: Char);
       procedure PushResultToScreen;
       procedure PushAddition;
+      procedure PushSubtraction;
   end;
 
 implementation
@@ -157,8 +158,35 @@ begin
     end
   else
   begin
-    //If operation is not unset, maybe should do some operation before change FOperation.
     FOperation := opAddition;
+    FlagClearScreen := True;
+    FlagConstant := False;
+    FlagDontRepeatOperation := True;
+  end;
+end;
+
+procedure TBaseCalc.PushSubtraction;
+begin
+  if FlagError then
+    Exit;
+
+  if FOperation = opSubtraction then
+    if FlagDontRepeatOperation then
+    begin
+      FlagConstant := not FlagConstant;
+      if FlagConstant then
+        K := StrToFloat(FScreen);
+    end
+    else
+    begin
+      FOperation := opSubtraction;
+      FlagClearScreen := True;
+      FScreen := FloatToStr( Answer - StrToFloat(FScreen) );
+      FlagDontRepeatOperation := True;
+    end
+  else
+  begin
+    FOperation := opSubtraction;
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;

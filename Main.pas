@@ -57,6 +57,7 @@ type
     ActBtnAddition: TAction;
     ActBtnEquals: TAction;
     TmrPowerOff: TTimer;
+    ActBtnSubtraction: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -78,6 +79,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure TmrPowerOffTimer(Sender: TObject);
     procedure ActionListExecute(Action: TBasicAction; var Handled: Boolean);
+    procedure ActBtnSubtractionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -176,6 +178,12 @@ begin
   PnlScreen.Caption := Calc.Screen;
 end;
 
+procedure TFrmMain.ActBtnSubtractionExecute(Sender: TObject);
+begin
+  Calc.PushSubtraction;
+  PnlScreen.Caption := Calc.Screen;
+end;
+
 procedure TFrmMain.ActionListExecute(Action: TBasicAction;
   var Handled: Boolean);
 begin
@@ -268,6 +276,8 @@ begin
 
     //Operations
     107: ActBtnAddition.Execute;
+    109: ActBtnSubtraction.Execute;
+    189: ActBtnSubtraction.Execute;
   end;
 end;
 
