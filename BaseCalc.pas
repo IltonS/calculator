@@ -83,7 +83,8 @@ begin
     FScreen := '0';
     FlagDecimal := False;
     FlagClearScreen := False;
-    FlagDontRepeatOperation := False;
+    FlagDontRepeatOperation := FlagConstant;
+    //FlagDontRepeatOperation := False;
   end;
 
   if (Length(FScreen)=15) then
