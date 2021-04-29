@@ -25,6 +25,7 @@ type
       property ConstantOn: Boolean read FlagConstant;
       property ErrorOn: Boolean read FlagError;
       procedure ClearAll;
+      procedure Clear;
       procedure PushToScreen(Value: Char);
       procedure PushResultToScreen;
       procedure PushAddition;
@@ -61,6 +62,21 @@ begin
   K := 0;
   Answer := 0;
   FOperation := opUnset;
+end;
+
+procedure TBaseCalc.Clear;
+begin
+  if FlagError then
+  begin
+    ClearAll;
+    Exit
+  end;
+
+  if FlagClearScreen then
+    Exit;
+
+  FScreen := '0';
+  FlagDecimal := False;
 end;
 
 procedure TBaseCalc.PushToScreen(Value: Char);

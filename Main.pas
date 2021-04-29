@@ -23,7 +23,6 @@ type
     ApplicationEvents: TApplicationEvents;
     Btn1: TSpeedButton;
     BtnAllClear: TSpeedButton;
-    PnlErrorFlag: TPanel;
     PnlConstantFlag: TPanel;
     PnlOperator: TPanel;
     Panel1: TPanel;
@@ -60,6 +59,8 @@ type
     ActBtnSubtraction: TAction;
     ActBtnMultiplication: TAction;
     ActBtnDivision: TAction;
+    BtnClear: TSpeedButton;
+    ActBtnClear: TAction;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -85,6 +86,7 @@ type
     procedure ActBtnMultiplicationExecute(Sender: TObject);
     procedure ActBtnDivisionExecute(Sender: TObject);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
+    procedure ActBtnClearExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -171,6 +173,12 @@ begin
   PnlScreen.Caption := Calc.Screen;
 end;
 
+procedure TFrmMain.ActBtnClearExecute(Sender: TObject);
+begin
+  Calc.Clear;
+  PnlScreen.Caption := Calc.Screen;
+end;
+
 procedure TFrmMain.ActBtnDecimalExecute(Sender: TObject);
 begin
   Calc.PushToScreen(',');
@@ -224,7 +232,8 @@ begin
   PnlConstantFlag.ShowCaption := Calc.ConstantOn;
 
   //Update PnlErrorFlag
-  PnlErrorFlag.ShowCaption := Calc.ErrorOn;
+  if Calc.ErrorOn then
+    PnlScreen.Caption := 'E';
 end;
 
 procedure TFrmMain.ApplicationEventsException(Sender: TObject; E: Exception);
@@ -267,6 +276,7 @@ begin
   else
     case Key of
       VK_ESCAPE: ActBtnAllClear.Execute;
+      VK_DELETE: ActBtnClear.Execute;
       VK_RETURN: ActBtnEquals.Execute;
 
       //Num Pad
@@ -295,7 +305,7 @@ begin
 
       //Comma
       188: ActBtnDecimal.Execute;
-      110: ActBtnDecimal.Execute;
+      VK_DECIMAL: ActBtnDecimal.Execute;
 
       //Operations
       107: ActBtnAddition.Execute;

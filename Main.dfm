@@ -176,6 +176,17 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowHint = True
   end
+  object BtnClear: TSpeedButton
+    Left = 108
+    Top = 65
+    Width = 33
+    Height = 33
+    Action = ActBtnClear
+    BiDiMode = bdLeftToRight
+    ParentShowHint = False
+    ParentBiDiMode = False
+    ShowHint = True
+  end
   object PnlScreen: TPanel
     Left = 8
     Top = 8
@@ -203,20 +214,8 @@ object FrmMain: TFrmMain
         Width = 200
       end>
   end
-  object PnlErrorFlag: TPanel
-    Left = 8
-    Top = 65
-    Width = 33
-    Height = 33
-    Hint = 'Erro|Exibe E em caso de erro.'
-    Caption = 'E'
-    ParentShowHint = False
-    ShowCaption = False
-    ShowHint = True
-    TabOrder = 2
-  end
   object PnlConstantFlag: TPanel
-    Left = 58
+    Left = 8
     Top = 65
     Width = 33
     Height = 33
@@ -225,17 +224,17 @@ object FrmMain: TFrmMain
     ParentShowHint = False
     ShowCaption = False
     ShowHint = True
-    TabOrder = 3
+    TabOrder = 2
   end
   object PnlOperator: TPanel
-    Left = 108
+    Left = 58
     Top = 65
     Width = 33
     Height = 33
     Hint = 'Operador|Exibe o operador atual.'
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 3
   end
   object Panel1: TPanel
     Left = 224
@@ -245,7 +244,7 @@ object FrmMain: TFrmMain
     BevelOuter = bvNone
     Color = clWindow
     ParentBackground = False
-    TabOrder = 5
+    TabOrder = 4
   end
   object ActionList: TActionList
     OnExecute = ActionListExecute
@@ -266,6 +265,12 @@ object FrmMain: TFrmMain
       Caption = 'AC'
       Hint = 'Atalho: Esc|Limpa a opera'#231#227'o atual.'
       OnExecute = ActBtnAllClearExecute
+    end
+    object ActBtnClear: TAction
+      Category = 'Button'
+      Caption = 'C'
+      Hint = 'Atalho: Del|Limpa a tela.'
+      OnExecute = ActBtnClearExecute
     end
     object ActBtn1: TAction
       Category = 'Button'
