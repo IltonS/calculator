@@ -172,6 +172,9 @@ begin
     end
   else
   begin
+    if (FOperation <> opUnset) and (not FlagConstant) and (not FlagClearScreen) then
+      PushResultToScreen;
+
     FOperation := opAddition;
     FlagClearScreen := True;
     FlagConstant := False;
@@ -200,6 +203,9 @@ begin
     end
   else
   begin
+    if (FOperation <> opUnset) and (not FlagConstant) and (not FlagClearScreen) then
+      PushResultToScreen;
+
     FOperation := opSubtraction;
     FlagClearScreen := True;
     FlagConstant := False;
@@ -228,6 +234,9 @@ begin
     end
   else
   begin
+    if (FOperation <> opUnset) and (not FlagConstant) and (not FlagClearScreen) then
+      PushResultToScreen;
+
     FOperation := opMultiplication;
     FlagClearScreen := True;
     FlagConstant := False;
@@ -264,6 +273,9 @@ begin
     end
   else
   begin
+    if (FOperation <> opUnset) and (not FlagConstant) and (not FlagClearScreen) then
+      PushResultToScreen;
+
     FOperation := opDivision;
     FlagClearScreen := True;
     FlagConstant := False;
