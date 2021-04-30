@@ -9,6 +9,7 @@ type
   TBaseCalc = class
     protected
       FScreen: String;
+      FScreenSize: Integer;
       FOperation: TOperations;
       FlagDecimal: Boolean;
       FlagClearScreen: Boolean;
@@ -18,9 +19,11 @@ type
       K: Double;
       Answer: Double;
       function ValidateInput(Value: Char): Boolean;
+      function FormatToScreen(Value: Double): String;
     public
-      constructor Create;
+      constructor Create(ScSize: Integer = 8);
       property Screen: String read FScreen;
+      property ScreenSize: Integer read FScreenSize;
       property Operation: TOperations read FOperation;
       property ConstantOn: Boolean read FlagConstant;
       property ErrorOn: Boolean read FlagError;
@@ -39,9 +42,10 @@ implementation
 uses
   System.SysUtils;
 
-constructor TBaseCalc.Create;
+constructor TBaseCalc.Create(ScSize: Integer = 8);
 begin
   ClearAll;
+  FScreenSize := ScSize;
 end;
 
 function TBaseCalc.ValidateInput(Value: Char): Boolean;
@@ -53,7 +57,8 @@ end;
 
 procedure TBaseCalc.ClearAll;
 begin
-  FScreen := '0';
+  if not FlagError then
+    FScreen := '0';
   FlagDecimal := False;
   FlagClearScreen := False;
   FlagConstant := False;
@@ -77,6 +82,45 @@ begin
 
   FScreen := '0';
   FlagDecimal := False;
+end;
+
+function TBaseCalc.FormatToScreen(Value: Double): String;
+var
+  IntegerPart, DecimalPart: Double;
+
+  IntegerPartLength, DecimalPartLength,
+  DecimalPartLengthAvailable, DecimalOutput: Integer;
+begin
+  {DecimalPart := Frac(Value);
+  IntegerPart := Value - DecimalPart;
+
+  if DecimalPart > 0 then
+    DecimalPartLength := FloatToStr(DecimalPart).Length-2
+  else
+    DecimalPartLength := 0;
+
+  IntegerPartLength := FloatToStr(IntegerPart).Length;
+
+  DecimalPartLengthAvailable := FScreenSize-IntegerPartLength-1;
+
+  if DecimalPartLength < DecimalPartLengthAvailable then
+    DecimalOutput := DecimalPartLength
+  else
+    DecimalOutput := DecimalPartLengthAvailable;
+
+
+  if IntegerPartLength > FScreenSize then
+  begin
+    FlagError := True;
+    FOperation := opUnset;
+    FScreen := '1,';
+    while FScreen.Length < FScreenSize do
+      FScreen := FScreen + '0';
+    raise Exception.Create('Overflow');
+  end;
+
+  Result := Format('%*.*f', [IntegerPartLength, DecimalOutput, Value]);}
+  Result := FloatToStr(Value);
 end;
 
 procedure TBaseCalc.PushToScreen(Value: Char);
@@ -103,7 +147,10 @@ begin
     //FlagDontRepeatOperation := False;
   end;
 
-  if (Length(FScreen)=15) then
+  {if (Length(FScreen)=15) then
+    Exit;}
+
+  if (Screen.Length+1) > FScreenSize then
     Exit;
 
   if (Value=',') and (FlagDecimal) then
@@ -133,10 +180,10 @@ begin
     if FlagConstant then
     begin
       case FOperation of
-        opAddition: FScreen := FloatToStr( StrToFloat(FScreen) + K );
-        opSubtraction: FScreen := FloatToStr( StrToFloat(FScreen) - K );
-        opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * K );
-        opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / K );
+        opAddition: FScreen := FormatToScreen( StrToFloat(FScreen) + K );
+        opSubtraction: FScreen := FormatToScreen( StrToFloat(FScreen) - K );
+        opMultiplication: FScreen := FormatToScreen( StrToFloat(FScreen) * K );
+        opDivision: FScreen := FormatToScreen( StrToFloat(FScreen) / K );
       end;
       FlagClearScreen := True;
       FlagDontRepeatOperation := True;
@@ -145,15 +192,15 @@ begin
     begin
       if not FlagDontRepeatOperation then
         case FOperation of
-          opAddition: FScreen := FloatToStr( Answer + StrToFloat(FScreen) );
-          opSubtraction: FScreen := FloatToStr( Answer - StrToFloat(FScreen) );
-          opMultiplication: FScreen := FloatToStr( Answer * StrToFloat(FScreen) );
-          opDivision: FScreen := FloatToStr( Answer / StrToFloat(FScreen) );
+          opAddition: FScreen := FormatToScreen( Answer + StrToFloat(FScreen) );
+          opSubtraction: FScreen := FormatToScreen( Answer - StrToFloat(FScreen) );
+          opMultiplication: FScreen := FormatToScreen( Answer * StrToFloat(FScreen) );
+          opDivision: FScreen := FormatToScreen( Answer / StrToFloat(FScreen) );
         end
       else
         case FOperation of
-          opMultiplication: FScreen := FloatToStr( StrToFloat(FScreen) * StrToFloat(FScreen) );
-          opDivision: FScreen := FloatToStr( StrToFloat(FScreen) / StrToFloat(FScreen) );
+          opMultiplication: FScreen := FormatToScreen( StrToFloat(FScreen) * StrToFloat(FScreen) );
+          opDivision: FScreen := FormatToScreen( StrToFloat(FScreen) / StrToFloat(FScreen) );
         end;
 
       Answer := 0;
@@ -184,7 +231,7 @@ begin
     begin
       FOperation := opAddition;
       FlagClearScreen := True;
-      FScreen := FloatToStr( Answer + StrToFloat(FScreen) );
+      FScreen := FormatToScreen( Answer + StrToFloat(FScreen) );
       FlagDontRepeatOperation := True;
     end
   else
@@ -215,7 +262,7 @@ begin
     begin
       FOperation := opSubtraction;
       FlagClearScreen := True;
-      FScreen := FloatToStr( Answer - StrToFloat(FScreen) );
+      FScreen := FormatToScreen( Answer - StrToFloat(FScreen) );
       FlagDontRepeatOperation := True;
     end
   else
@@ -246,7 +293,7 @@ begin
     begin
       FOperation := opMultiplication;
       FlagClearScreen := True;
-      FScreen := FloatToStr( Answer * StrToFloat(FScreen) );
+      FScreen := FormatToScreen( Answer * StrToFloat(FScreen) );
       FlagDontRepeatOperation := True;
     end
   else
@@ -279,7 +326,7 @@ begin
       FlagClearScreen := True;
 
       try
-        FScreen := FloatToStr( Answer / StrToFloat(FScreen) );
+        FScreen := FormatToScreen( Answer / StrToFloat(FScreen) );
       except
         FlagError := True;
         FOperation := opUnset;

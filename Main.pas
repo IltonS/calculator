@@ -233,7 +233,15 @@ begin
 
   //Update PnlErrorFlag
   if Calc.ErrorOn then
-    PnlScreen.Caption := 'E';
+  begin
+    //PnlScreen.Caption := 'E';
+    PnlScreen.Caption := Calc.Screen;
+    StatusBar.Panels[0].Text := 'E.';
+  end
+  else
+  begin
+    StatusBar.Panels[0].Text := '';
+  end;
 end;
 
 procedure TFrmMain.ApplicationEventsException(Sender: TObject; E: Exception);
