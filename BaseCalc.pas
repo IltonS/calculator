@@ -19,7 +19,7 @@ type
       K: Double;
       Answer: Double;
       function ValidateInput(Value: Char): Boolean;
-      function FormatToScreen(Value: Double): String;
+      function FormatToScreen(const Value: Double): String;
     public
       constructor Create(ScSize: Integer = 8);
       property Screen: String read FScreen;
@@ -40,7 +40,7 @@ type
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, System.Math;
 
 constructor TBaseCalc.Create(ScSize: Integer = 8);
 begin
@@ -84,43 +84,59 @@ begin
   FlagDecimal := False;
 end;
 
-function TBaseCalc.FormatToScreen(Value: Double): String;
+function TBaseCalc.FormatToScreen(const Value: Double): String;
 var
-  IntegerPart, DecimalPart: Double;
-
-  IntegerPartLength, DecimalPartLength,
-  DecimalPartLengthAvailable, DecimalOutput: Integer;
+  C: Char;
+  ValueAsStr, IntegerPart, DecimalPart, MaxValueAsStr: String;
+  ScanInteger: Boolean;
+  I, ValueAsInt, IntegerPartLength, DecimalDigits: Integer;
 begin
-  {DecimalPart := Frac(Value);
-  IntegerPart := Value - DecimalPart;
+  MaxValueAsStr := '';
 
-  if DecimalPart > 0 then
-    DecimalPartLength := FloatToStr(DecimalPart).Length-2
-  else
-    DecimalPartLength := 0;
+  for I := 1 to FScreenSize do
+    MaxValueAsStr := MaxValueAsStr + '9';
 
-  IntegerPartLength := FloatToStr(IntegerPart).Length;
-
-  DecimalPartLengthAvailable := FScreenSize-IntegerPartLength-1;
-
-  if DecimalPartLength < DecimalPartLengthAvailable then
-    DecimalOutput := DecimalPartLength
-  else
-    DecimalOutput := DecimalPartLengthAvailable;
-
-
-  if IntegerPartLength > FScreenSize then
+  if Value > StrToFloat(MaxValueAsStr) then
   begin
     FlagError := True;
     FOperation := opUnset;
-    FScreen := '1,';
-    while FScreen.Length < FScreenSize do
-      FScreen := FScreen + '0';
+    //FScreen := '0';
     raise Exception.Create('Overflow');
   end;
 
-  Result := Format('%*.*f', [IntegerPartLength, DecimalOutput, Value]);}
-  Result := FloatToStr(Value);
+  IntegerPart := '';
+  DecimalPart := '';
+  ScanInteger := True;
+
+  ValueAsInt := Trunc(Value);
+  IntegerPartLength := IntToStr(ValueAsInt).Length;
+  if ValueAsInt < 0 then
+    Dec(IntegerPartLength);
+
+  DecimalDigits := Max(0, FScreenSize-IntegerPartLength);
+
+  ValueAsStr := FloatToStrF(Value, ffFixed, 15, DecimalDigits);
+
+  for C in ValueAsStr do
+  begin
+    if C = ',' then
+    begin
+      ScanInteger := False;
+      Continue;
+    end;
+
+    if ScanInteger then
+      IntegerPart := IntegerPart + C
+    else
+      DecimalPart := DecimalPart + C;
+  end;
+
+  DecimalPart := DecimalPart.TrimRight(['0']);
+
+  if DecimalPart.IsEmpty then
+    Result := IntegerPart
+  else
+    Result := IntegerPart + ',' + DecimalPart;
 end;
 
 procedure TBaseCalc.PushToScreen(Value: Char);
