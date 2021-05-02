@@ -40,12 +40,12 @@ type
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, System.Math;
 
 constructor TBaseCalc.Create(ScSize: Integer = 8);
 begin
   ClearAll;
-  FScreenSize := ScSize;
+  FScreenSize := Max(8,ScSize);
 end;
 
 function TBaseCalc.ValidateInput(Value: Char): Boolean;
@@ -112,7 +112,7 @@ begin
 
   DecimalDigits := FScreenSize-IntegerPartLength;
 
-  ValueAsStr := FloatToStrF(Value, ffFixed, 15, DecimalDigits);
+  ValueAsStr := FloatToStrF(Value, ffFixed, 18, DecimalDigits);
 
   IntegerPartAsStr := '';
   DecimalPartAsStr := '';
