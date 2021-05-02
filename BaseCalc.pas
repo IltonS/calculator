@@ -16,10 +16,10 @@ type
       FlagConstant: Boolean;
       FlagDontRepeatOperation: Boolean;
       FlagError: Boolean;
-      K: Double;
-      Answer: Double;
+      K: Extended;
+      Answer: Extended;
       function ValidateInput(Value: Char): Boolean;
-      function FormatToScreen(const Value: Double): String;
+      function FormatToScreen(const Value: Extended): String;
     public
       constructor Create(ScSize: Integer = 8);
       property Screen: String read FScreen;
@@ -84,13 +84,13 @@ begin
   FlagDecimal := False;
 end;
 
-function TBaseCalc.FormatToScreen(const Value: Double): String;
+function TBaseCalc.FormatToScreen(const Value: Extended): String;
 var
   C: Char;
   ValueAsStr, MaxValueAsStr, IntegerPartAsStr, DecimalPartAsStr: String;
   ScanInteger: Boolean;
   I, IntegerPartLength, DecimalDigits: Integer;
-  IntegerPart, DecimalPart: Double;
+  IntegerPart, DecimalPart: Extended;
 begin
   MaxValueAsStr := '';
 

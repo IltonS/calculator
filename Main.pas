@@ -218,6 +218,8 @@ begin
 end;
 
 procedure TFrmMain.ActionListUpdate(Action: TBasicAction; var Handled: Boolean);
+var
+  ErrorMsg: String;
 begin
   //Update PnlOperator
   case Calc.Operation of
@@ -234,9 +236,9 @@ begin
   //Update PnlErrorFlag
   if Calc.ErrorOn then
   begin
-    //PnlScreen.Caption := 'E';
-    PnlScreen.Caption := Calc.Screen;
-    StatusBar.Panels[0].Text := 'E.';
+    ErrorMsg := Calc.Screen;
+    SetLength(ErrorMsg, Calc.Screen.Length-1);
+    PnlScreen.Caption := ErrorMsg + 'E';
   end
   else
   begin
