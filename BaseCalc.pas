@@ -40,7 +40,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Math;
+  System.SysUtils;
 
 constructor TBaseCalc.Create(ScSize: Integer = 8);
 begin
@@ -87,16 +87,17 @@ end;
 function TBaseCalc.FormatToScreen(const Value: Double): String;
 var
   C: Char;
-  ValueAsStr, IntegerPart, DecimalPart, MaxValueAsStr: String;
+  ValueAsStr, MaxValueAsStr, IntegerPartAsStr, DecimalPartAsStr: String;
   ScanInteger: Boolean;
-  I, ValueAsInt, IntegerPartLength, DecimalDigits: Integer;
+  I, IntegerPartLength, DecimalDigits: Integer;
+  IntegerPart, DecimalPart: Double;
 begin
   MaxValueAsStr := '';
 
   for I := 1 to FScreenSize do
     MaxValueAsStr := MaxValueAsStr + '9';
 
-  if Value > StrToFloat(MaxValueAsStr) then
+  if Trunc(Value) > StrToInt(MaxValueAsStr) then
   begin
     FlagError := True;
     FOperation := opUnset;
@@ -104,18 +105,18 @@ begin
     raise Exception.Create('Overflow');
   end;
 
-  IntegerPart := '';
-  DecimalPart := '';
-  ScanInteger := True;
+  DecimalPart := Frac(Value);
+  IntegerPart := Value - DecimalPart;
 
-  ValueAsInt := Trunc(Value);
-  IntegerPartLength := IntToStr(ValueAsInt).Length;
-  if ValueAsInt < 0 then
-    Dec(IntegerPartLength);
+  IntegerPartLength := FloatToStr(IntegerPart).Length;
 
-  DecimalDigits := Max(0, FScreenSize-IntegerPartLength);
+  DecimalDigits := FScreenSize-IntegerPartLength;
 
   ValueAsStr := FloatToStrF(Value, ffFixed, 15, DecimalDigits);
+
+  IntegerPartAsStr := '';
+  DecimalPartAsStr := '';
+  ScanInteger := True;
 
   for C in ValueAsStr do
   begin
@@ -126,17 +127,17 @@ begin
     end;
 
     if ScanInteger then
-      IntegerPart := IntegerPart + C
+      IntegerPartAsStr := IntegerPartAsStr + C
     else
-      DecimalPart := DecimalPart + C;
+      DecimalPartAsStr := DecimalPartAsStr + C;
   end;
 
-  DecimalPart := DecimalPart.TrimRight(['0']);
+  DecimalPartAsStr := DecimalPartAsStr.TrimRight(['0']);
 
-  if DecimalPart.IsEmpty then
-    Result := IntegerPart
+  if DecimalPartAsStr.IsEmpty then
+    Result := IntegerPartAsStr
   else
-    Result := IntegerPart + ',' + DecimalPart;
+    Result := IntegerPartAsStr + ',' + DecimalPartAsStr;
 end;
 
 procedure TBaseCalc.PushToScreen(Value: Char);
@@ -162,9 +163,6 @@ begin
     FlagDontRepeatOperation := FlagConstant;
     //FlagDontRepeatOperation := False;
   end;
-
-  {if (Length(FScreen)=15) then
-    Exit;}
 
   if (Screen.Length+1) > FScreenSize then
     Exit;
