@@ -57,8 +57,7 @@ end;
 
 procedure TBaseCalc.ClearAll;
 begin
-  if not FlagError then
-    FScreen := '0';
+  FScreen := '0';
   FlagDecimal := False;
   FlagClearScreen := False;
   FlagConstant := False;
@@ -73,7 +72,8 @@ procedure TBaseCalc.Clear;
 begin
   if FlagError then
   begin
-    ClearAll;
+    FlagClearScreen := True;
+    FlagError := False;
     Exit
   end;
 
@@ -87,7 +87,7 @@ end;
 function TBaseCalc.FormatToScreen(const Value: Extended): String;
 var
   MaxValueAsStr, FloatFormat: String;
-  I, IntegerPartLength, DecimalDigits, RoundDigits: Integer;
+  I, IntegerPartLength, OverflowLength, DecimalDigits, RoundDigits: Integer;
   IntegerPart, DecimalPart: Extended;
 begin
   MaxValueAsStr := '';
@@ -97,9 +97,14 @@ begin
 
   if (Trunc(Value) > StrToInt(MaxValueAsStr)) or (Trunc(Value) < StrToInt('-'+MaxValueAsStr)) then
   begin
+    OverflowLength := IntToStr(Trunc(Value)).Length - FScreenSize;
+    if Value < 0 then Dec(OverflowLength);
+
+    DecimalDigits :=  FScreenSize - IntToStr(Trunc(Power10(RoundTo(Value,OverflowLength), FScreenSize*-1))).Length;
+    if Value < 0 then Inc(DecimalDigits);
+
+    FScreen := FloatToStrF(Power10(RoundTo(Value,OverflowLength), FScreenSize*-1), ffFixed, 18, DecimalDigits);
     FlagError := True;
-    FOperation := opUnset;
-    //FScreen := '0';
     raise Exception.Create('Overflow');
   end;
 
@@ -146,7 +151,7 @@ begin
     //FlagDontRepeatOperation := False;
   end;
 
-  if (Screen.Length+1) > FScreenSize then
+  if (Screen.Replace(',','').Length+1) > FScreenSize then
     Exit;
 
   if (Value=',') and (FlagDecimal) then
