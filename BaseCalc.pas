@@ -95,7 +95,7 @@ begin
   for I := 1 to FScreenSize do
     MaxValueAsStr := MaxValueAsStr + '9';
 
-  if Trunc(Value) > StrToInt(MaxValueAsStr) then
+  if (Trunc(Value) > StrToInt(MaxValueAsStr)) or (Trunc(Value) < StrToInt('-'+MaxValueAsStr)) then
   begin
     FlagError := True;
     FOperation := opUnset;
