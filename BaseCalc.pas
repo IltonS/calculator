@@ -86,10 +86,8 @@ end;
 
 function TBaseCalc.FormatToScreen(const Value: Extended): String;
 var
-  C: Char;
-  ValueAsStr, MaxValueAsStr, IntegerPartAsStr, DecimalPartAsStr: String;
-  ScanInteger: Boolean;
-  I, IntegerPartLength, DecimalDigits: Integer;
+  MaxValueAsStr, FloatFormat: String;
+  I, IntegerPartLength, DecimalDigits, RoundDigits: Integer;
   IntegerPart, DecimalPart: Extended;
 begin
   MaxValueAsStr := '';
@@ -112,32 +110,16 @@ begin
 
   DecimalDigits := FScreenSize-IntegerPartLength;
 
-  ValueAsStr := FloatToStrF(Value, ffFixed, 18, DecimalDigits);
-
-  IntegerPartAsStr := '';
-  DecimalPartAsStr := '';
-  ScanInteger := True;
-
-  for C in ValueAsStr do
+  FloatFormat := '0';
+  RoundDigits := 0;
+  if DecimalDigits > 0 then
   begin
-    if C = ',' then
-    begin
-      ScanInteger := False;
-      Continue;
-    end;
-
-    if ScanInteger then
-      IntegerPartAsStr := IntegerPartAsStr + C
-    else
-      DecimalPartAsStr := DecimalPartAsStr + C;
+    RoundDigits := DecimalDigits * (-1);
+    FloatFormat := FloatFormat + '.';
+    for I := 1 to DecimalDigits do
+      FloatFormat := FloatFormat + '#';
   end;
-
-  DecimalPartAsStr := DecimalPartAsStr.TrimRight(['0']);
-
-  if DecimalPartAsStr.IsEmpty then
-    Result := IntegerPartAsStr
-  else
-    Result := IntegerPartAsStr + ',' + DecimalPartAsStr;
+  Result := FormatFloat(FloatFormat,RoundTo(Value,RoundDigits));
 end;
 
 procedure TBaseCalc.PushToScreen(Value: Char);
