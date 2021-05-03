@@ -2,9 +2,16 @@ unit BaseCalc;
 
 interface
 
+uses
+  System.SysUtils;
+
 type
   TOperations = (opAddition, opSubtraction, opMultiplication, opDivision, opUnset);
   TValidInput = set of Char;
+
+  EInvalidInput = class(Exception);
+  EInvalidOperation = class(Exception);
+  EOverflow = class(Exception);
 
   TBaseCalc = class
     protected
@@ -40,7 +47,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Math;
+  System.Math;
 
 constructor TBaseCalc.Create(ScSize: Integer = 8);
 begin
@@ -105,7 +112,7 @@ begin
 
     FScreen := FloatToStrF(Power10(RoundTo(Value,OverflowLength), FScreenSize*-1), ffFixed, 18, DecimalDigits);
     FlagError := True;
-    raise Exception.Create('Overflow');
+    raise EOverflow.Create('Overflow');
   end;
 
   DecimalPart := Frac(Value);
@@ -136,7 +143,7 @@ begin
   begin
     FlagError := True;
     FOperation := opUnset;
-    raise Exception.Create('Invalid Input');
+    raise EInvalidInput.Create('Invalid Input');
   end;
 
   if FlagClearScreen then
@@ -210,9 +217,17 @@ begin
       FOperation := opUnset;
     end;
   except
-    FlagError := True;
-    FOperation := opUnset;
-    raise Exception.Create('Invalid Operation');
+    on EOverflow do
+    begin
+      FlagError := True;
+      if not FlagConstant then FOperation := opUnset;
+    end;
+    on Exception do
+    begin
+      FlagError := True;
+      FOperation := opUnset;
+      raise EInvalidOperation.Create('Invalid Operation');
+    end;
   end;
 end;
 
@@ -244,6 +259,8 @@ begin
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;
+
+    FScreen := FormatToScreen(StrToFloat(FScreen));
   end;
 end;
 
@@ -275,6 +292,8 @@ begin
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;
+
+    FScreen := FormatToScreen(StrToFloat(FScreen));
   end;
 end;
 
@@ -306,6 +325,8 @@ begin
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;
+
+    FScreen := FormatToScreen(StrToFloat(FScreen));
   end;
 end;
 
@@ -331,7 +352,7 @@ begin
       except
         FlagError := True;
         FOperation := opUnset;
-        raise Exception.Create('Invalid Operation');
+        raise EInvalidOperation.Create('Invalid Operation');
       end;
 
       FlagDontRepeatOperation := True;
@@ -345,6 +366,8 @@ begin
     FlagClearScreen := True;
     FlagConstant := False;
     FlagDontRepeatOperation := True;
+
+    FScreen := FormatToScreen(StrToFloat(FScreen));
   end;
 end;
 

@@ -239,10 +239,6 @@ begin
     ErrorMsg := Calc.Screen;
     SetLength(ErrorMsg, Calc.Screen.Length-1);
     PnlScreen.Caption := ErrorMsg + 'E';
-  end
-  else
-  begin
-    StatusBar.Panels[0].Text := '';
   end;
 end;
 
