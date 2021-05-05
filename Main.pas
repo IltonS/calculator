@@ -5,8 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Menus,
-  System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.AppEvnts, BaseCalc,
-  Vcl.Buttons;
+  System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.AppEvnts,
+  Vcl.Buttons, BaseCalc;
 
 type
   TFrmMain = class(TForm)
@@ -61,6 +61,7 @@ type
     ActBtnDivision: TAction;
     BtnClear: TSpeedButton;
     ActBtnClear: TAction;
+    BaseCalc: TBaseCalc;
     procedure FormCreate(Sender: TObject);
     procedure ApplicationEventsHint(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -79,7 +80,6 @@ type
     procedure ActBtnAdditionExecute(Sender: TObject);
     procedure ActionListUpdate(Action: TBasicAction; var Handled: Boolean);
     procedure ActBtnEqualsExecute(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure TmrPowerOffTimer(Sender: TObject);
     procedure ActionListExecute(Action: TBasicAction; var Handled: Boolean);
     procedure ActBtnSubtractionExecute(Sender: TObject);
@@ -95,7 +95,6 @@ type
 
 var
   FrmMain: TFrmMain;
-  Calc: TBaseCalc;
 
 implementation
 
@@ -103,110 +102,110 @@ implementation
 
 procedure TFrmMain.ActBtn0Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('0');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('0');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn1Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('1');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('1');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn2Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('2');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('2');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn3Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('3');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('3');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn4Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('4');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('4');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn5Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('5');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('5');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn6Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('6');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('6');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn7Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('7');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('7');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn8Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('8');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('8');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtn9Execute(Sender: TObject);
 begin
-  Calc.PushToScreen('9');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen('9');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnAdditionExecute(Sender: TObject);
 begin
-  Calc.PushAddition;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushAddition;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnAllClearExecute(Sender: TObject);
 begin
-  Calc.ClearAll;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.ClearAll;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnClearExecute(Sender: TObject);
 begin
-  Calc.Clear;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.Clear;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnDecimalExecute(Sender: TObject);
 begin
-  Calc.PushToScreen(',');
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushToScreen(',');
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnDivisionExecute(Sender: TObject);
 begin
-  Calc.PushDivision;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushDivision;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnEqualsExecute(Sender: TObject);
 begin
-  Calc.PushResultToScreen;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushResultToScreen;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnMultiplicationExecute(Sender: TObject);
 begin
-  Calc.PushMultiplication;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushMultiplication;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActBtnSubtractionExecute(Sender: TObject);
 begin
-  Calc.PushSubtraction;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.PushSubtraction;
+  PnlScreen.Caption := BaseCalc.Screen;
 end;
 
 procedure TFrmMain.ActionListExecute(Action: TBasicAction;
@@ -222,7 +221,7 @@ var
   ErrorMsg: String;
 begin
   //Update PnlOperator
-  case Calc.Operation of
+  case BaseCalc.Operation of
     opAddition: PnlOperator.Caption := '+';
     opSubtraction: PnlOperator.Caption := '-';
     opMultiplication: PnlOperator.Caption := '×';
@@ -231,13 +230,13 @@ begin
   end;
 
   //Update PnlConstantFlag
-  PnlConstantFlag.ShowCaption := Calc.ConstantOn;
+  PnlConstantFlag.ShowCaption := BaseCalc.ConstantOn;
 
   //Update PnlErrorFlag
-  if Calc.ErrorOn then
+  if BaseCalc.ErrorOn then
   begin
-    ErrorMsg := Calc.Screen;
-    SetLength(ErrorMsg, Calc.Screen.Length-1);
+    ErrorMsg := BaseCalc.Screen;
+    SetLength(ErrorMsg, BaseCalc.Screen.Length-1);
     PnlScreen.Caption := ErrorMsg + 'E';
   end;
 end;
@@ -255,16 +254,11 @@ end;
 procedure TFrmMain.FormCreate(Sender: TObject);
 begin
   FrmMain.Width := 206;
-  Calc := TBaseCalc.Create;
-  PnlScreen.Caption := Calc.Screen;
+  BaseCalc.Init;
+  PnlScreen.Caption := BaseCalc.Screen;
 
   TmrPowerOff.Interval := 1000 * 60 * 6; //6 Minutes
   TmrPowerOff.Enabled := True;
-end;
-
-procedure TFrmMain.FormDestroy(Sender: TObject);
-begin
-  FreeAndNil(Calc);
 end;
 
 procedure TFrmMain.FormKeyDown(Sender: TObject; var Key: Word;

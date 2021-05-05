@@ -17,7 +17,6 @@ object FrmMain: TFrmMain
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
@@ -237,7 +236,7 @@ object FrmMain: TFrmMain
     TabOrder = 3
   end
   object Panel1: TPanel
-    Left = 224
+    Left = 230
     Top = 8
     Width = 185
     Height = 246
@@ -396,5 +395,9 @@ object FrmMain: TFrmMain
     OnTimer = TmrPowerOffTimer
     Left = 352
     Top = 16
+  end
+  object BaseCalc: TBaseCalc
+    Left = 352
+    Top = 80
   end
 end
