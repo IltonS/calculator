@@ -3,7 +3,7 @@ unit BaseCalc;
 interface
 
 uses
-  System.SysUtils;
+  System.SysUtils, System.Classes;
 
 type
   TOperations = (opAddition, opSubtraction, opMultiplication, opDivision, opUnset);
@@ -13,43 +13,56 @@ type
   EInvalidOperation = class(Exception);
   EOverflow = class(Exception);
 
-  TBaseCalc = class
-    protected
-      FScreen: String;
-      FScreenSize: Integer;
-      FOperation: TOperations;
-      FlagDecimal: Boolean;
-      FlagClearScreen: Boolean;
-      FlagConstant: Boolean;
-      FlagDontRepeatOperation: Boolean;
-      FlagError: Boolean;
-      K: Extended;
-      Answer: Extended;
-      function ValidateInput(Value: Char): Boolean;
-      function FormatToScreen(const Value: Extended): String;
-    public
-      constructor Create(ScSize: Integer = 8);
-      property Screen: String read FScreen;
-      property ScreenSize: Integer read FScreenSize;
-      property Operation: TOperations read FOperation;
-      property ConstantOn: Boolean read FlagConstant;
-      property ErrorOn: Boolean read FlagError;
-      procedure ClearAll;
-      procedure Clear;
-      procedure PushToScreen(Value: Char);
-      procedure PushResultToScreen;
-      procedure PushAddition;
-      procedure PushSubtraction;
-      procedure PushMultiplication;
-      procedure PushDivision;
+  TBaseCalc = class(TComponent)
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+    FScreen: String;
+    FScreenSize: Integer;
+    FOperation: TOperations;
+    FlagDecimal: Boolean;
+    FlagClearScreen: Boolean;
+    FlagConstant: Boolean;
+    FlagDontRepeatOperation: Boolean;
+    FlagError: Boolean;
+    K: Extended;
+    Answer: Extended;
+    function ValidateInput(Value: Char): Boolean;
+    function FormatToScreen(const Value: Extended): String;
+  public
+    { Public declarations }
+    procedure Init(ScSize: Integer = 8);
+    procedure ClearAll;
+    procedure Clear;
+    procedure PushToScreen(Value: Char);
+    procedure PushResultToScreen;
+    procedure PushAddition;
+    procedure PushSubtraction;
+    procedure PushMultiplication;
+    procedure PushDivision;
+  published
+    { Published declarations }
+    property Screen: String read FScreen;
+    property ScreenSize: Integer read FScreenSize;
+    property Operation: TOperations read FOperation;
+    property ConstantOn: Boolean read FlagConstant;
+    property ErrorOn: Boolean read FlagError;
   end;
+
+procedure Register;
 
 implementation
 
 uses
   System.Math;
 
-constructor TBaseCalc.Create(ScSize: Integer = 8);
+procedure Register;
+begin
+  RegisterComponents('Calculators', [TBaseCalc]);
+end;
+
+procedure TBaseCalc.Init(ScSize: Integer = 8);
 begin
   ClearAll;
   FScreenSize := Max(8,ScSize);
