@@ -3,7 +3,7 @@ object FrmMain: TFrmMain
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'Calculadora'
+  Caption = 'Calculator'
   ClientHeight = 290
   ClientWidth = 423
   Color = clBtnFace
@@ -250,137 +250,137 @@ object FrmMain: TFrmMain
     OnUpdate = ActionListUpdate
     Left = 264
     Top = 80
-    object AjudaTopicosCmd: TAction
-      Category = 'Ajuda'
-      Caption = '&T'#243'picos da Ajuda'
+    object HelpTopicsCmd: TAction
+      Category = 'Help'
+      Caption = '&Help Topics'
       ShortCut = 112
     end
-    object AjudaSobreCmd: TAction
-      Category = 'Ajuda'
-      Caption = '&Sobre'
+    object HelpAboutCmd: TAction
+      Category = 'Help'
+      Caption = '&About'
     end
     object ActBtnAllClear: TAction
       Category = 'Button'
       Caption = 'AC'
-      Hint = 'Atalho: Esc|Limpa a opera'#231#227'o atual.'
+      Hint = 'Shortcut: Esc|Clears the current calculation.'
       OnExecute = ActBtnAllClearExecute
     end
     object ActBtnClear: TAction
       Category = 'Button'
       Caption = 'C'
-      Hint = 'Atalho: Del|Limpa a tela.'
+      Hint = 'Shortcut: Del|Clears the displayed number.'
       OnExecute = ActBtnClearExecute
     end
     object ActBtn1: TAction
       Category = 'Button'
       Caption = '1'
-      Hint = 'Atalho: 1|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn1Execute
     end
     object ActBtn2: TAction
       Category = 'Button'
       Caption = '2'
-      Hint = 'Atalho: 2|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn2Execute
     end
     object ActBtn3: TAction
       Category = 'Button'
       Caption = '3'
-      Hint = 'Atalho: 3|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn3Execute
     end
     object ActBtn4: TAction
       Category = 'Button'
       Caption = '4'
-      Hint = 'Atalho: 4|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn4Execute
     end
     object ActBtn5: TAction
       Category = 'Button'
       Caption = '5'
-      Hint = 'Atalho: 5|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn5Execute
     end
     object ActBtn6: TAction
       Category = 'Button'
       Caption = '6'
-      Hint = 'Atalho: 6|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn6Execute
     end
     object ActBtn7: TAction
       Category = 'Button'
       Caption = '7'
-      Hint = 'Atalho: 7|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn7Execute
     end
     object ActBtn8: TAction
       Category = 'Button'
       Caption = '8'
-      Hint = 'Atalho: 8|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn8Execute
     end
     object ActBtn9: TAction
       Category = 'Button'
       Caption = '9'
-      Hint = 'Atalho: 9|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn9Execute
     end
     object ActBtn0: TAction
       Category = 'Button'
       Caption = '0'
-      Hint = 'Atalho: 0|Insere o valor no display.'
+      Hint = 'Shortcut: 0-9|Puts this number in the display.'
       OnExecute = ActBtn0Execute
     end
     object ActBtnDecimal: TAction
       Category = 'Button'
       Caption = ','
-      Hint = 'Atalho: ,|Insere o separador decimal.'
+      Hint = 'Shortcut: .|Inserts a decimal point.'
       OnExecute = ActBtnDecimalExecute
     end
     object ActBtnAddition: TAction
       Category = 'Button'
       Caption = '+'
-      Hint = 'Atalho: +|Soma.'
+      Hint = 'Shortcut: +|Adds.'
       OnExecute = ActBtnAdditionExecute
     end
     object ActBtnSubtraction: TAction
       Category = 'Button'
       Caption = '-'
-      Hint = 'Atalho: -|Subtrai.'
+      Hint = 'Shortcut: -|Subtracts.'
       OnExecute = ActBtnSubtractionExecute
     end
     object ActBtnMultiplication: TAction
       Category = 'Button'
       Caption = #215
-      Hint = 'Atalho: *|Multiplica.'
+      Hint = 'Shortcut: *|Multiplies.'
       OnExecute = ActBtnMultiplicationExecute
     end
     object ActBtnDivision: TAction
       Category = 'Button'
       Caption = #247
-      Hint = 'Atalho: /|Divide.'
+      Hint = 'Shortcut: /|Divides.'
       OnExecute = ActBtnDivisionExecute
     end
     object ActBtnEquals: TAction
       Category = 'Button'
       Caption = '='
-      Hint = 'Atalho: Enter|Executa a opera'#231#227'o atual.'
+      Hint = 'Shortcut: Enter|Performs any operation.'
       OnExecute = ActBtnEqualsExecute
     end
   end
   object MainMenu: TMainMenu
     Left = 264
     Top = 136
-    object Ajuda1: TMenuItem
-      Caption = '&Ajuda'
+    object Help1: TMenuItem
+      Caption = '&Help'
       object AjudaTopicosItem: TMenuItem
-        Action = AjudaTopicosCmd
+        Action = HelpTopicsCmd
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object AjudaSobreItem: TMenuItem
-        Action = AjudaSobreCmd
+        Action = HelpAboutCmd
       end
     end
   end

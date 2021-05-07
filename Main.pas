@@ -11,10 +11,10 @@ uses
 type
   TFrmMain = class(TForm)
     ActionList: TActionList;
-    AjudaTopicosCmd: TAction;
-    AjudaSobreCmd: TAction;
+    HelpTopicsCmd: TAction;
+    HelpAboutCmd: TAction;
     MainMenu: TMainMenu;
-    Ajuda1: TMenuItem;
+    Help1: TMenuItem;
     AjudaTopicosItem: TMenuItem;
     N1: TMenuItem;
     AjudaSobreItem: TMenuItem;

@@ -12,7 +12,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   TStyleManager.TrySetStyle('Windows10 Dark');
-  Application.Title := 'Calculadora';
+  Application.Title := 'Calculator';
   Application.CreateForm(TFrmMain, FrmMain);
   Application.Run;
 end.
