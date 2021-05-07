@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Menus,
   System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.AppEvnts,
-  Vcl.Buttons, BaseCalc;
+  Vcl.Buttons, BaseCalc, About;
 
 type
   TFrmMain = class(TForm)
@@ -87,6 +87,7 @@ type
     procedure ActBtnDivisionExecute(Sender: TObject);
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure ActBtnClearExecute(Sender: TObject);
+    procedure HelpAbout(Sender: TObject);
   private
     { Private declarations }
   public
@@ -315,6 +316,11 @@ begin
       111: ActBtnDivision.Execute;
       193: ActBtnDivision.Execute;
     end;
+end;
+
+procedure TFrmMain.HelpAbout(Sender: TObject);
+begin
+  AboutBox.ShowModal;
 end;
 
 procedure TFrmMain.TmrPowerOffTimer(Sender: TObject);

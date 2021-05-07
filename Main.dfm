@@ -258,6 +258,7 @@ object FrmMain: TFrmMain
     object HelpAboutCmd: TAction
       Category = 'Help'
       Caption = '&About'
+      OnExecute = HelpAbout
     end
     object ActBtnAllClear: TAction
       Category = 'Button'
