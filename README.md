@@ -1,4 +1,4 @@
-# Calculator (0.x)
+# ![Icon Image](/resources/calculator-grid-icon_48.png) Calculator (0.x)
 A simple arithmetic calculator that implements the behavior of Casio calculators. Written in Delphi for Win32 platform.
 
 See [TBaseCalc](TBaseCalc.md) for technical documentation on the TBaseCalc component.
