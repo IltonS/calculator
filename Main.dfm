@@ -218,7 +218,7 @@ object FrmMain: TFrmMain
     Top = 65
     Width = 33
     Height = 33
-    Hint = 'Constante|Exibe K para c'#225'lculos constantes.'
+    Hint = 'Constant|Displays K for constant calculations.'
     Caption = 'K'
     ParentShowHint = False
     ShowCaption = False
@@ -230,7 +230,7 @@ object FrmMain: TFrmMain
     Top = 65
     Width = 33
     Height = 33
-    Hint = 'Operador|Exibe o operador atual.'
+    Hint = 'Operator|Displays the current operator.'
     ParentShowHint = False
     ShowHint = True
     TabOrder = 3
@@ -254,6 +254,7 @@ object FrmMain: TFrmMain
       Category = 'Help'
       Caption = '&Help Topics'
       ShortCut = 112
+      OnExecute = HelpTopics
     end
     object HelpAboutCmd: TAction
       Category = 'Help'

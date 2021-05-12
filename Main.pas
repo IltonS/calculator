@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Menus,
   System.Actions, Vcl.ActnList, Vcl.ComCtrls, Vcl.AppEvnts,
-  Vcl.Buttons, BaseCalc, About;
+  Vcl.Buttons, BaseCalc, About, ShellAPI;
 
 type
   TFrmMain = class(TForm)
@@ -88,6 +88,7 @@ type
     procedure ApplicationEventsException(Sender: TObject; E: Exception);
     procedure ActBtnClearExecute(Sender: TObject);
     procedure HelpAbout(Sender: TObject);
+    procedure HelpTopics(Sender: TObject);
   private
     { Private declarations }
   public
@@ -321,6 +322,11 @@ end;
 procedure TFrmMain.HelpAbout(Sender: TObject);
 begin
   AboutBox.ShowModal;
+end;
+
+procedure TFrmMain.HelpTopics(Sender: TObject);
+begin
+  ShellExecute(Handle, 'Open', PChar('calculator.chm'), '', '', SW_NORMAL);
 end;
 
 procedure TFrmMain.TmrPowerOffTimer(Sender: TObject);
