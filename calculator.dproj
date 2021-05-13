@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>calculator.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -83,8 +83,8 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Debug>true</VerInfo_Debug>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Keys>CompanyName=Ilton Sequeira;FileDescription=Calculator;FileVersion=0.0.1.21;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=Calculator;ProductVersion=0.0.1;Comments=</VerInfo_Keys>
-        <VerInfo_Build>21</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Ilton Sequeira;FileDescription=Calculator;FileVersion=0.0.1.22;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=Calculator;ProductVersion=0.0.1;Comments=</VerInfo_Keys>
+        <VerInfo_Build>22</VerInfo_Build>
         <VerInfo_Release>1</VerInfo_Release>
         <VerInfo_MajorVer>0</VerInfo_MajorVer>
         <Icon_MainIcon>resources\calculator.ico</Icon_MainIcon>
@@ -998,7 +998,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy .\help\calculator.chm $(OUTPUTDIR)</PostBuildEvent>
+        <PostBuildEvent>copy .\help\calculator.chm $(OUTPUTDIR)</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Release' And '$(Platform)'=='Win32'">
@@ -1006,7 +1006,7 @@ $(PostBuildEvent)]]></PostBuildEvent>
         <PreBuildEventIgnoreExitCode>False</PreBuildEventIgnoreExitCode>
         <PreLinkEvent/>
         <PreLinkEventIgnoreExitCode>False</PreLinkEventIgnoreExitCode>
-        <PostBuildEvent>copy .\help\calculator.chm $(OUTPUTDIR)&amp;&amp;del $(OUTPUTDIR)\*.dcu</PostBuildEvent>
+        <PostBuildEvent>copy .\help\calculator.chm $(OUTPUTDIR)&amp;&amp;del $(OUTPUTDIR)\*.dcu</PostBuildEvent>
         <PostBuildEventIgnoreExitCode>False</PostBuildEventIgnoreExitCode>
     </PropertyGroup>
 </Project>
