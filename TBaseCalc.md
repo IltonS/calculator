@@ -4,7 +4,7 @@ Base component with core functions for calculators. This component aims to emula
 
 ## Initializing the component
 
-When adding a TBaseCalc to your form you can setup the maximum number of digitis on the screen, not including the decimal separator or the minus sign.
+When adding a TBaseCalc to your form you can setup the maximum number of digits on the screen, not including the decimal separator or the minus sign.
 
 `BaseBaseCalc.Init(10);`
 
